@@ -1,0 +1,620 @@
+<title>提親準備檢核表</title>
+<style>
+  @font-face {
+    font-family: "SysSerifTC";
+    src: local("Noto Serif TC"), local("Songti TC"), local("PMingLiU");
+  }
+
+  :root {
+    --bg: #EFF1EC;
+    --surface: #FBFBF8;
+    --surface-2: #E7EAE3;
+    --ink: #1F2D28;
+    --ink-soft: #52625A;
+    --ink-faint: #8A9690;
+    --jade: #1E5B47;
+    --jade-soft: #DCE7E0;
+    --jade-line: #1E5B4733;
+    --persimmon: #C1622E;
+    --persimmon-soft: #F5E3D6;
+    --gold-line: #B08D4555;
+    --shadow: 0 1px 2px rgba(31,45,40,0.06), 0 6px 20px rgba(31,45,40,0.05);
+    --radius: 14px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #131E19;
+      --surface: #1B2924;
+      --surface-2: #24352E;
+      --ink: #ECEEE7;
+      --ink-soft: #B7C2BB;
+      --ink-faint: #7C8A83;
+      --jade: #55B491;
+      --jade-soft: #22392F;
+      --jade-line: #55b49155;
+      --persimmon: #E28C55;
+      --persimmon-soft: #3A2A1E;
+      --gold-line: #C9A46A55;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #131E19;
+    --surface: #1B2924;
+    --surface-2: #24352E;
+    --ink: #ECEEE7;
+    --ink-soft: #B7C2BB;
+    --ink-faint: #7C8A83;
+    --jade: #55B491;
+    --jade-soft: #22392F;
+    --jade-line: #55b49155;
+    --persimmon: #E28C55;
+    --persimmon-soft: #3A2A1E;
+    --gold-line: #C9A46A55;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px rgba(0,0,0,0.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #EFF1EC;
+    --surface: #FBFBF8;
+    --surface-2: #E7EAE3;
+    --ink: #1F2D28;
+    --ink-soft: #52625A;
+    --ink-faint: #8A9690;
+    --jade: #1E5B47;
+    --jade-soft: #DCE7E0;
+    --jade-line: #1E5B4733;
+    --persimmon: #C1622E;
+    --persimmon-soft: #F5E3D6;
+    --gold-line: #B08D4555;
+    --shadow: 0 1px 2px rgba(31,45,40,0.06), 0 6px 20px rgba(31,45,40,0.05);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.hero {
+    padding: 56px 0 28px;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--jade);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--jade);
+    display: inline-block;
+  }
+  h1 {
+    font-family: "SysSerifTC", "Noto Serif TC", "Songti TC", serif;
+    font-size: clamp(30px, 5vw, 42px);
+    font-weight: 600;
+    margin: 0 0 12px;
+    text-wrap: balance;
+    letter-spacing: 0.01em;
+  }
+  .lede {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 60ch;
+    margin: 0;
+  }
+
+  /* ---------- Sticky progress ---------- */
+  .progress-bar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--jade-line);
+    padding: 10px 0;
+  }
+  .progress-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-label strong {
+    color: var(--jade);
+    font-size: 15px;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--jade);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+  }
+  .reset-btn {
+    font-size: 12px;
+    color: var(--ink-faint);
+    background: none;
+    border: 1px solid var(--jade-line);
+    border-radius: 999px;
+    padding: 5px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .reset-btn:hover { color: var(--ink); border-color: var(--jade); }
+  .reset-btn:focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
+
+  /* ---------- Section shell ---------- */
+  section { margin-top: 48px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--gold-line);
+    padding-bottom: 10px;
+  }
+  .section-head h2 {
+    font-family: "SysSerifTC", "Noto Serif TC", "Songti TC", serif;
+    font-size: 21px;
+    font-weight: 600;
+    margin: 0;
+  }
+  .section-tag {
+    font-size: 12px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .section-note {
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    margin: -6px 0 18px;
+  }
+
+  /* ---------- Step 0 callout ---------- */
+  .callout {
+    background: var(--persimmon-soft);
+    border: 1px solid color-mix(in srgb, var(--persimmon) 35%, transparent);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+  }
+  .callout-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--persimmon);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .callout-head .pill {
+    background: var(--persimmon);
+    color: var(--surface);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+  }
+  .callout p.desc {
+    margin: 0 0 14px;
+    color: var(--ink);
+    font-size: 14.5px;
+  }
+  .callout p.desc b { color: var(--persimmon); }
+
+  /* ---------- Checklist rows ---------- */
+  .check-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .check-row:hover { background: color-mix(in srgb, var(--surface-2) 60%, transparent); }
+  .check-row input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--jade);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .check-row span { font-size: 15px; }
+  .check-row input:checked ~ span {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-color: var(--jade-line);
+  }
+
+  /* ---------- Two-column prep cards ---------- */
+  .prep-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 620px) {
+    .prep-grid { grid-template-columns: 1fr; }
+  }
+  .prep-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px 20px 12px;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--jade);
+  }
+  .prep-card.groom { border-top-color: var(--persimmon); }
+  .prep-card h3 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prep-card h3 .role-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--jade-soft);
+    color: var(--jade);
+  }
+  .prep-card.groom h3 .role-badge { background: var(--persimmon-soft); color: var(--persimmon); }
+  .prep-card .role-name { color: var(--ink-faint); font-size: 12px; }
+
+  /* ---------- Topic clusters (15 items) ---------- */
+  .cluster-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 620px) {
+    .cluster-grid { grid-template-columns: 1fr; }
+  }
+  .cluster {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px 20px 10px;
+    box-shadow: var(--shadow);
+  }
+  .cluster h4 {
+    font-size: 13.5px;
+    margin: 0 0 6px;
+    color: var(--jade);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.02em;
+  }
+  .cluster h4 .count {
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+  .cluster .check-row span { font-size: 14.5px; }
+
+  /* ---------- Taboo strip ---------- */
+  .taboo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .taboo-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface);
+    border-left: 3px solid var(--persimmon);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+  }
+  .taboo-num {
+    font-family: "SysSerifTC", "Noto Serif TC", serif;
+    color: var(--persimmon);
+    font-size: 18px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.4;
+    min-width: 1.4em;
+  }
+  .taboo-item p { margin: 0; font-size: 14.5px; }
+  .taboo-item p b { color: var(--ink); }
+  .taboo-item p span.tip { color: var(--ink-soft); display: block; font-size: 13px; margin-top: 2px; }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gold-line);
+    color: var(--ink-faint);
+    font-size: 12.5px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  @media print {
+    .progress-bar, .reset-btn { display: none; }
+    body { background: #fff; color: #000; }
+  }
+</style>
+
+<div class="progress-bar">
+  <div class="progress-inner">
+    <span class="progress-label">已核對 <strong id="doneCount">0</strong> / <span id="totalCount">0</span></span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <button class="reset-btn" id="resetBtn" type="button">重置勾選</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">提親準備 · 雙方核對清單</div>
+    <h1>提親準備檢核表</h1>
+    <p class="lede">正式見雙方父母之前，先把該聊、該帶、該避開的事項對齊。勾選項目會自動存在這台裝置上，下次打開還在。</p>
+  </header>
+
+  <section id="step0">
+    <div class="section-head">
+      <h2>STEP 0　拜訪女方家長，取得認可</h2>
+      <span class="section-tag">依情況選一種方式</span>
+    </div>
+    <p class="section-note">因為<b>女方爸爸比較保守傳統</b>，建議在正式提親或聚餐前，先安排一次拜訪，讓長輩對這件事有心理準備。下面兩種方案選一種——方案一比較正式、直接徵求同意；方案二比較輕鬆、兩人一起去聊聊。</p>
+
+    <div class="callout" style="margin-bottom: 16px;">
+      <div class="callout-head"><span class="pill">方案一</span>男方單獨拜訪，徵求求婚同意</div>
+      <p class="desc">男方先單獨找時間拜訪女方父母，親口表達想跟<b>女方</b>結婚的心意，取得長輩的認可與祝福。不用搞得像審判，但要讓長輩感受到誠意跟負責——這是他一個人去，展現「我是認真的」最直接的方式。</p>
+      <ul class="check-list" data-group="plan1">
+        <li class="check-row"><input type="checkbox" data-id="s1-1"><span>選一個女方父母都在、氣氛自然的時間，不用刻意挑重大節日</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-2"><span>帶一份簡單伴手禮（水果、點心即可），展現禮貌但不用隆重</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-3"><span>提前想清楚要說的重點：為什麼想跟她結婚、對未來的規劃</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-4"><span>主動說明自己目前的狀況（工作、經濟、住的地方），讓長輩安心</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-5"><span>明確講出「想請兩位同意，讓我跟她結婚」，不要講得模糊曖昧</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-6"><span>耐心聽父母的想法跟顧慮，不急著當場要答案</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s1-7"><span>順便問一下父母對後續流程有沒有想法（要不要提親、看不看日子），先聽聽就好</span></li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <div class="callout-head"><span class="pill">方案二</span>兩人一起拜訪，可以聊的內容</div>
+      <p class="desc">兩人一起去，讓女方父母多認識男方、聊聊接下來的方向。這次先不用急著談聘金、桌數這些細節（留給後面正式提親或聚餐），重點是讓長輩安心、拉近關係。</p>
+      <ul class="check-list" data-group="plan2">
+        <li class="check-row"><input type="checkbox" data-id="s2-1"><span>分享兩人交往這段時間的相處，讓長輩感受到穩定與認真</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s2-2"><span>說明兩人對未來生活的初步規劃（工作地點、是否跟長輩同住等）</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s2-3"><span>多留空間讓女方父母跟男方聊聊，感受他的為人跟態度</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s2-4"><span>初步聊一下結婚的大方向（大概哪一年、想簡單辦還是盛大辦）</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s2-5"><span>詢問父母對接下來安排有沒有想法或顧慮</span></li>
+        <li class="check-row"><input type="checkbox" data-id="s2-6"><span>約定好下一步——什麼時候要正式提親，或雙方家長聚餐</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="prep">
+    <div class="section-head">
+      <h2>各自先準備</h2>
+      <span class="section-tag">女方 5 項 · 男方 5 項</span>
+    </div>
+    <p class="section-note">提親當天前，雙方分別在自己家裡先打底，減少臨場的手忙腳亂。</p>
+    <div class="prep-grid">
+
+      <div class="prep-card bride">
+        <h3><span class="role-badge">女方</span><span class="role-name">女方這邊要做的</span></h3>
+        <ul class="check-list" data-group="prep-bride">
+          <li class="check-row"><input type="checkbox" data-id="b-0"><span>先找機會跟媽媽聊聊，問清楚爸媽是希望男方正式上門提親，還是簡單約出來聚餐就好</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-1"><span>先跟自己爸媽聊過結婚的想法，了解他們對禮俗的期待</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-6"><span>把下面「15 項必談事項」先跟爸媽過一輪，心裡有初步共識再赴約</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-2"><span>整理好當天想確認的重點清單（避免臨場忘記）</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-3"><span>當天穿著簡約洋裝或優雅套裝，端莊自然即可</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-4"><span>協助家裡備妥茶水、點心，環境整理乾淨</span></li>
+          <li class="check-row"><input type="checkbox" data-id="b-5"><span>心態放輕鬆——提親重點是雙方家庭祝福，不是考試</span></li>
+        </ul>
+      </div>
+
+      <div class="prep-card groom">
+        <h3><span class="role-badge">男方</span><span class="role-name">男友那邊要做的</span></h3>
+        <ul class="check-list" data-group="prep-groom">
+          <li class="check-row"><input type="checkbox" data-id="g-1"><span>跟自己父母討論過結婚方向與大致時間規劃</span></li>
+          <li class="check-row"><input type="checkbox" data-id="g-2"><span>準備包裝體面、品質好的伴手禮（喜餅／甜點／水果禮盒）</span></li>
+          <li class="check-row"><input type="checkbox" data-id="g-3"><span>跟女方協調好時間，優先選週末白天</span></li>
+          <li class="check-row"><input type="checkbox" data-id="g-4"><span>提前了解女方家的禮俗期待與忌諱</span></li>
+          <li class="check-row"><input type="checkbox" data-id="g-5"><span>當天穿著整齊、態度誠懇有禮</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="section-head">
+      <h2>提親當天必談 15 事項</h2>
+      <span class="section-tag">分 4 類方便討論</span>
+    </div>
+    <p class="section-note">不用一次講完，但至少要有共識落在哪一邊、什麼時候再細談。</p>
+
+    <div class="cluster-grid">
+
+      <div class="cluster">
+        <h4>時間與吉日 <span class="count">4 項</span></h4>
+        <ul class="check-list" data-group="topic-time">
+          <li class="check-row"><input type="checkbox" data-id="t-1"><span>結婚時間（年份／季節）大致定位</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-2"><span>是否要辦訂婚儀式</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-3"><span>迎娶當天的流程安排</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-4"><span>結婚吉日怎麼選、看不看日子</span></li>
+        </ul>
+      </div>
+
+      <div class="cluster">
+        <h4>婚宴與規模 <span class="count">4 項</span></h4>
+        <ul class="check-list" data-group="topic-banquet">
+          <li class="check-row"><input type="checkbox" data-id="t-5"><span>要不要辦婚宴</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-6"><span>婚宴桌數規模大致預估</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-7"><span>婚宴費用雙方怎麼分擔</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-8"><span>禮金收取方式與歸屬</span></li>
+        </ul>
+      </div>
+
+      <div class="cluster">
+        <h4>金錢與禮俗 <span class="count">3 項</span></h4>
+        <ul class="check-list" data-group="topic-money">
+          <li class="check-row"><input type="checkbox" data-id="t-9"><span>聘金金額的期待（雙方家庭）</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-10"><span>傳統禮俗要不要簡化、簡化到什麼程度</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-11"><span>婚後新房安排方式</span></li>
+        </ul>
+      </div>
+
+      <div class="cluster">
+        <h4>形式與後續 <span class="count">4 項</span></h4>
+        <ul class="check-list" data-group="topic-format">
+          <li class="check-row"><input type="checkbox" data-id="t-12"><span>婚禮形式偏傳統還是簡約</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-13"><span>婚紗拍攝的大致時間</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-14"><span>婚禮主要由哪一方主辦、統籌</span></li>
+          <li class="check-row"><input type="checkbox" data-id="t-15"><span>婚禮大致預算範圍</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="taboo">
+    <div class="section-head">
+      <h2>5 大禁忌，提醒自己別踩</h2>
+      <span class="section-tag">不勾選，當場提醒用</span>
+    </div>
+    <div class="taboo-list">
+      <div class="taboo-item">
+        <span class="taboo-num">01</span>
+        <p><b>不空手上門</b><span class="tip">伴手禮是基本禮貌，喜餅、甜點、水果禮盒都可以，包裝別太隨便。</span></p>
+      </div>
+      <div class="taboo-item">
+        <span class="taboo-num">02</span>
+        <p><b>避免太晚時間拜訪</b><span class="tip">白天為宜，晚上拜訪容易顯得倉促或失禮。</span></p>
+      </div>
+      <div class="taboo-item">
+        <span class="taboo-num">03</span>
+        <p><b>穿著要正式但別太隨便</b><span class="tip">整齊乾淨即可，不需要過度盛裝，但拖鞋短褲絕對不行。</span></p>
+      </div>
+      <div class="taboo-item">
+        <span class="taboo-num">04</span>
+        <p><b>金錢話題語氣要委婉</b><span class="tip">聘金、禮金這類話題，用討論代替要求，避免直接開口喊價。</span></p>
+      </div>
+      <div class="taboo-item">
+        <span class="taboo-num">05</span>
+        <p><b>禮俗有分歧以溝通為主</b><span class="tip">兩家習俗不同很正常，用聊的方式找共識，不要當場爭論對錯。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>資料整理自《提親流程 6 步驟與結婚準備完整指南》</span>
+    <span>勾選狀態儲存在本機瀏覽器</span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var STORAGE_KEY = "tiqin-checklist-v1";
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('input[type="checkbox"][data-id]'));
+    var doneEl = document.getElementById("doneCount");
+    var totalEl = document.getElementById("totalCount");
+    var fillEl = document.getElementById("progressFill");
+    var resetBtn = document.getElementById("resetBtn");
+
+    function loadState() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      } catch (e) {
+        return {};
+      }
+    }
+    function saveState(state) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    var state = loadState();
+
+    function applyState() {
+      boxes.forEach(function (b) {
+        b.checked = !!state[b.dataset.id];
+      });
+      updateProgress();
+    }
+
+    function updateProgress() {
+      var total = boxes.length;
+      var done = boxes.filter(function (b) { return b.checked; }).length;
+      doneEl.textContent = done;
+      totalEl.textContent = total;
+      fillEl.style.width = (total ? (done / total * 100) : 0) + "%";
+    }
+
+    boxes.forEach(function (b) {
+      b.addEventListener("change", function () {
+        state[b.dataset.id] = b.checked;
+        saveState(state);
+        updateProgress();
+      });
+      // clicking the row (not just the box) toggles it
+      var row = b.closest(".check-row");
+      if (row) {
+        row.addEventListener("click", function (e) {
+          if (e.target === b) return;
+          b.checked = !b.checked;
+          b.dispatchEvent(new Event("change"));
+        });
+      }
+    });
+
+    resetBtn.addEventListener("click", function () {
+      state = {};
+      saveState(state);
+      applyState();
+    });
+
+    applyState();
+  })();
+</script>
